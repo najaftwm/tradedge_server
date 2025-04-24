@@ -5,6 +5,8 @@ const generatePaymentURL = async (req, res) => {
   try {
     const { amount, redirectUrl } = req.body;
 
+    const amountInPaisa = Number(amount) * 100 ;
+
     const merchantOrderId = `ORDER_${Date.now()}`;
     console.log('Merchant Order ID:', merchantOrderId);
 
@@ -12,7 +14,7 @@ const generatePaymentURL = async (req, res) => {
       process.env.PHONEPE_PAYMENT_URL,
       {
         merchantOrderId,
-        amount,
+        amountInPaisa,
         paymentFlow: {
           type: 'PG_CHECKOUT',
           message: 'Payment message used for collect requests',
