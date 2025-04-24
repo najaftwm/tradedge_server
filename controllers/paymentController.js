@@ -5,7 +5,7 @@ const generatePaymentURL = async (req, res) => {
   try {
     const { amount, redirectUrl } = req.body;
 
-    const amount = Number(amount) * 100 ;
+    const amount = amount * 100 ;
 
     const merchantOrderId = `ORDER_${Date.now()}`;
     console.log('Merchant Order ID:', merchantOrderId);
