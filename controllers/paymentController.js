@@ -4,16 +4,15 @@ const { getToken } = require('../utils/authToken');
 const generatePaymentURL = async (req, res) => {
   try {
     const { amount, redirectUrl } = req.body;
-    const amountInPaise = amount * 100; // Convert to paise (smallest currency unit)
+
     const merchantOrderId = `ORDER_${Date.now()}`;
-    
     console.log('Merchant Order ID:', merchantOrderId);
-    
+
     const phonepeRes = await axios.post(
       process.env.PHONEPE_PAYMENT_URL,
       {
         merchantOrderId,
-        amount: amountInPaise, // Use the converted amount
+        amount,
         paymentFlow: {
           type: 'PG_CHECKOUT',
           message: 'Payment message used for collect requests',
@@ -29,7 +28,7 @@ const generatePaymentURL = async (req, res) => {
         },
       }
     );
-    
+
     console.log('🔗 Redirect URL generated');
     const redirectLink = phonepeRes.data.redirectUrl;
     res.status(200).json({ merchantOrderId, redirectUrl: redirectLink });
