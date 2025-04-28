@@ -142,3 +142,4 @@ const validateAmount = (amount) => {
 };
 
 module.exports = { generatePaymentURL };
+
