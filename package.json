@@ -3,8 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "jest",
+    "build": "tsc",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "start:prod": "cross-env NODE_ENV=production node server.js",
+    "clean": "rm -rf node_modules && npm install",
+    "debug": "node --inspect server.js",
+    "prepare": "husky install",
+    "check:types": "tsc --noEmit",
+    "check:security": "npm audit",
+    "check:outdated": "npm outdated"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +30,15 @@
     "express": "^5.1.0",
     "mongoose": "^8.13.3",
     "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.3.0"
   }
 }
